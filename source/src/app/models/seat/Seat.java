@@ -11,6 +11,11 @@ public abstract class Seat implements Cloneable {
         this.isTaken = false;
     }
 
+    public double getPrice() {
+
+        return this.price;
+    }
+
     public boolean reserveSeat() {
 
         if(isTaken) return false;

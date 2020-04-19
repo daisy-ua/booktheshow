@@ -9,22 +9,22 @@
             "imagePath": "https://i.pinimg.com/originals/1a/ef/b4/1aefb4bfd7063a34361aebf8b2779337.jpg",
             "session": [
                 {
-                    "hall": "0",
-                    "luxSeat": 120,
-                    "goodSeat": 60,
-                    "time": "1015"
+                    "hall": 0,
+                    "luxSeat": 120.0,
+                    "goodSeat": 60.0,
+                    "time": "10:15"
                 },
                 {
-                    "hall": "0",
-                    "luxSeat": 200,
-                    "goodSeat": 90,
-                    "time": "1350"
+                    "hall": 0,
+                    "luxSeat": 200.0,
+                    "goodSeat": 90.0,
+                    "time": "12:50"
                 },
                 {
-                    "hall": "1",
-                    "luxSeat": 120,
-                    "goodSeat": 60,
-                    "time": "1015"
+                    "hall": 1,
+                    "luxSeat": 120.0,
+                    "goodSeat": 60.0,
+                    "time": "11:15"
                 }
             ]
         },
@@ -36,16 +36,16 @@
             "imagePath": "https://fffmovieposters.com/wp-content/uploads/73642.jpg",
             "session": [
                 {
-                    "hall": "1",
-                    "luxSeat": 90,
-                    "goodSeat": 50,
-                    "time": "1015"
+                    "hall": 1,
+                    "luxSeat": 90.0,
+                    "goodSeat": 50.0,
+                    "time": "10:15"
                 },
                 {
-                    "hall": "1",
-                    "luxSeat": 120,
-                    "goodSeat": 60,
-                    "time": "1350"
+                    "hall": 1,
+                    "luxSeat": 120.0,
+                    "goodSeat": 60.0,
+                    "time": "12:50"
                 }
             ]
         }

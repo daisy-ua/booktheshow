@@ -1,6 +1,8 @@
 package app.models.theatre;
 
 import app.models.hall.*;
+import app.models.affiche.*;
+
 import java.util.*;
 
 import org.json.JSONArray;
@@ -9,12 +11,13 @@ import org.json.JSONObject;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import java.nio.file.*;;
+import java.nio.file.*;
 
 public abstract class Theatre {
 
     protected List<ProxyHall> halls; 
-    protected JSONArray affiche;
+    protected List<Movie> movies;
+
     protected JSONObject database;
     protected String filePath;
 
@@ -22,8 +25,23 @@ public abstract class Theatre {
 
         this.database = readFile(this.filePath);
         initHalls();
+        initAffiche();
     }
 
+    public List<Movie> getAffiche() {
+
+        return this.movies;
+    }
+
+    public List<ProxyHall> getHalls() {
+
+        return this.halls;
+    }
+
+    public ProxyHall getHallById(int id) {
+
+        return this.halls.get(id);
+    }
     private JSONObject readFile(String filePath) {
 
         JSONObject obj = null;
@@ -45,7 +63,6 @@ public abstract class Theatre {
         return obj;
     }
 
-
     private void initHalls() {
 
         this.halls = new ArrayList<ProxyHall>();
@@ -55,6 +72,15 @@ public abstract class Theatre {
         objects.forEach(obj -> parseHallObject((JSONObject) obj));
     }
 
+    private void initAffiche() {
+
+        this.movies = new ArrayList<Movie>();
+
+        JSONArray objects = this.database.getJSONArray("movies");
+
+        objects.forEach(obj -> parseMovieObject((JSONObject) obj));
+    }
+
     private void parseHallObject(JSONObject hall) {
 
         int id = (int) hall.get("id");
@@ -62,5 +88,18 @@ public abstract class Theatre {
         int column = (int) hall.get("columns");
 
         this.halls.add(new ProxyHall(id, row, column));
+    }
+
+    private void parseMovieObject(JSONObject movie) {
+
+        int id = (int) movie.get("id");
+        String title = (String) movie.get("title");
+        int duration = (int) movie.get("duration");
+        String description = (String) movie.get("description");
+        String imagePath = (String) movie.get("imagePath");
+
+        JSONArray sessions = movie.getJSONArray("session");
+
+        this.movies.add(new Movie(id, title, duration, description, imagePath).addSessions(sessions));
     }
 }
