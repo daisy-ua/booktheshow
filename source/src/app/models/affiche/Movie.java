@@ -71,12 +71,13 @@ public class Movie {
 
     private void parseSessionObject(JSONObject session) {
 
+        int id = (int) session.get("id");
         int hallId = (int) session.get("hall");
         double luxSeatPrice = (double) session.get("luxSeat");
         double goodSeatPrice = (double) session.get("goodSeat");
         String time = (String) session.get("time");
 
-        this.sessions.add(new Session(hallId, luxSeatPrice, goodSeatPrice, time));
+        this.sessions.add(new Session(id, hallId, luxSeatPrice, goodSeatPrice, time));
 
     }
 }
