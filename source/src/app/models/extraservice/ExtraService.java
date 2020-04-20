@@ -35,4 +35,16 @@ public class ExtraService {
         return amount;
     }
 
+    public String display() {
+
+        String res = "";
+
+        for(Snack snack : snacks) {
+            res += snack.getDescription();
+            res += "\n";
+        }
+
+        return res;
+    }
+
 }
