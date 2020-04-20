@@ -7,13 +7,10 @@ public class SeatStore {
 
     private static Map<SeatType, Seat> seatMap = new HashMap<SeatType, Seat>();
 
-    private static double gprice = 100;
-    private static double lprice = 150; //TODO: get theater price
-
     static {
 
-        seatMap.put(SeatType.GOOD, new GoodSeat(gprice));
-        seatMap.put(SeatType.LUX, new LuxSeat(lprice));
+        seatMap.put(SeatType.GOOD, new GoodSeat());
+        seatMap.put(SeatType.LUX, new LuxSeat());
     }
 
     public static Seat getSeat(SeatType type) {
