@@ -3,7 +3,7 @@ package app.models.payment;
 public class PayByWallet implements PayStrategy {
 
     @Override
-    public boolean checkInquiry(Object requisites) {
+    public boolean checkInquiry() {
 
         //some of validation or\and requesting the customer 
         //wallet details logic
@@ -11,14 +11,14 @@ public class PayByWallet implements PayStrategy {
     }
 
     @Override
-    public boolean makePayment(double price, Object requisites) {
+    public boolean makePayment(double price) {
 
         //implement payment using wallet option logic logic here
         return true; 
     }
 
     @Override
-    public boolean getStatus(int id) {
+    public boolean getStatus() {
 
         //getting transaction status for a wallet payment
         return true;
