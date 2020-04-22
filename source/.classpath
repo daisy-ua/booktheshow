@@ -4,4 +4,5 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="output" path="bin"/>
 	<classpathentry exported="true" kind="lib" path="lib/json-20190722.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/material-ui-swing-1.1.1_0.3.jar"/>
 </classpath>
