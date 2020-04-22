@@ -1,5 +1,7 @@
 package app.controllers;
 
+import app.models.theatre.Theatre;
+import app.models.theatre.TheatreCreator;
 import app.views.MoviePick;
 import app.views.TheatrePick;
 
@@ -18,11 +20,14 @@ public class TheatreController {
     }
 
     private void selectTheatre() {
-
+        //lavina
         theatrePick.setVisible(false);
 
-        MoviePick m = new MoviePick();
-        theatrePick.getParentFrame().getContentPane().add(m);
-        m.setVisible(true);
+        MoviePick pickView = new MoviePick();
+        theatrePick.getParentFrame().getContentPane().add(pickView);
+
+        Theatre theatre = TheatreCreator.getLavinaMultiplex();
+        new MovieController(theatre.getAffiche(), pickView).initController();
+        pickView.setVisible(true);
     }
 }
