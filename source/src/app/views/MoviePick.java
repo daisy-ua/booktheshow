@@ -1,6 +1,5 @@
 package app.views;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +15,7 @@ public class MoviePick extends JPanel {
         
         super();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        
+
         cards = new ArrayList<SessionCard>();     
     }
 
@@ -24,6 +23,7 @@ public class MoviePick extends JPanel {
 
         this.cards = cards;
         for(SessionCard card : cards) {
+
             add(card);
         }
     }

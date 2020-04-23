@@ -1,9 +1,11 @@
 package app.views;
 
-import java.time.LocalTime;
-import java.util.List;
-
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
@@ -11,7 +13,6 @@ public class SessionCard extends JPanel {
 
     protected JLabel movieTitle;
     protected JLabel movieImage;
-    // protected List<LocalTime> sessions;
     protected Sessions sessions;
 
     public SessionCard() {
@@ -21,14 +22,20 @@ public class SessionCard extends JPanel {
 
     public SessionCard(JLabel title, JLabel image, Sessions sessions) {
         
-        super();
+        super(null);
         this.movieImage = image;
         this.movieTitle = title;
         this.sessions = sessions;
 
-        add(movieTitle);
+        setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 10, 0, 10), new EtchedBorder()));
+
         add(movieImage);
-        add(sessions);        
+        movieImage.setBounds(25, 25, 195, 260);
+        add(movieTitle);
+        movieTitle.setBounds(245, 20, 400, 35);
+        add(sessions); 
+        sessions.setLayout(new FlowLayout(FlowLayout.LEFT));   
+        sessions.setBounds(240, 150, 200, 35);
     }
 
     public JLabel getMovieTitle() {
