@@ -15,8 +15,10 @@ public abstract class Seat implements Cloneable {
     public Seat setPrice(double price) {
 
         this.price = price;
+        this.isTaken = false;
         return this;
     }
+
     public double getPrice() {
 
         return this.price;
@@ -45,6 +47,11 @@ public abstract class Seat implements Cloneable {
 
         this.isTaken = true;
         return true;
+    }
+
+    public boolean isTaken() {
+
+        return isTaken;
     }
 
     public Object clone() {

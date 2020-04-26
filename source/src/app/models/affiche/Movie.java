@@ -35,14 +35,15 @@ public class Movie {
         return this.title;
     }
 
-    public List<LocalTime> getSessionsTime() {
+    public List<String> getSessionsTime() {
 
-        List<LocalTime> timelines = new ArrayList<LocalTime>();
+        List<String> timelines = new ArrayList<String>();
 
-        this.sessions.forEach(session -> timelines.add(session.getTime()));
+        this.sessions.forEach(session -> timelines.add(session.getTime().toString()));
 
         return timelines;
     }
+    
 
     public int getId() {
 
