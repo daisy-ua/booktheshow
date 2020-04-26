@@ -3,17 +3,21 @@ package app.controllers;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.net.URL;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import app.models.affiche.Movie;
+import app.models.theatre.GlobalTheatre;
 import app.views.MoviePick;
+import app.views.SeatPick;
 import app.views.SessionCard;
 import app.views.Sessions;
 
@@ -52,7 +56,9 @@ public class MovieController {
 
     private Sessions getSessionsTime(Movie movie) {
 
-        return new Sessions(new JList(movie.getSessionsTime().toArray()));
+        Sessions sessions = new Sessions(new JList(movie.getSessionsTime().toArray()));
+        initSessionsEvent(sessions, movie);
+        return sessions;
     }
 
     private JLabel getImageIcon(Movie movie) {
@@ -75,5 +81,29 @@ public class MovieController {
         }
 
         return label;
+    }
+
+    private void initSessionsEvent(Sessions sessions, Movie movie) {
+
+        JList<String> list = sessions.getSessions();
+
+        list.addListSelectionListener(new ListSelectionListener() {
+
+            @Override
+            public void valueChanged(ListSelectionEvent arg0) {
+
+                if (!arg0.getValueIsAdjusting()) {
+
+                    SeatPick seatPick = new SeatPick();
+                    pickView.getParentFrame().getContentPane().add(seatPick);
+
+                    new SeatController(movie, movie.getSessionDetails(list.getSelectedIndex()), seatPick)
+                            .initController();
+
+                    pickView.setVisible(false);        
+                    seatPick.setVisible(true);        
+                }
+            }
+        });
     }
 }
