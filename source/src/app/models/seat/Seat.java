@@ -4,6 +4,7 @@ public abstract class Seat implements Cloneable {
 
     protected double price;
     protected boolean isTaken;
+    protected SeatType seatType;
     protected int row;
     protected int column;
 
@@ -22,6 +23,17 @@ public abstract class Seat implements Cloneable {
     public double getPrice() {
 
         return this.price;
+    }
+
+    public Seat setSeatType(SeatType type) {
+
+        this.seatType = type;
+        return this;
+    }
+
+    public SeatType getSeatType() {
+
+        return this.seatType;
     }
 
     public Seat setPosition(int row, int column) {

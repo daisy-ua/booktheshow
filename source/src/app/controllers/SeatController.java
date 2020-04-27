@@ -58,7 +58,11 @@ public class SeatController {
         int column = (int) seat.getClientProperty("column");
         SeatType type = (SeatType) seat.getClientProperty("seatType");
 
-        setupOrderView(SeatStore.getSeat(type).setPosition(row, column).setPrice(price));
+        setupOrderView(SeatStore.getSeat(type)
+            .setPosition(row, column)
+            .setPrice(price)
+            .setSeatType(type)
+        );
     }
 
     private void setupOrderView(Seat seat) {

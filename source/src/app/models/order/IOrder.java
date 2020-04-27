@@ -6,6 +6,7 @@ public interface  IOrder {
     public String getDescription();
     public String getMovieTitle();
     public String getMovieTime();
+    public String getSeatType();
     public int getMovieDuration();
     public int getHallNumber();
     public int getSeatRow();

@@ -65,6 +65,10 @@ public class MainOrder extends JPanel {
                     .addComponent(titleColumn)
                     .addComponent(column)
                 )
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(seatType)
+                    .addComponent(price)
+                )
             )
         );
     }
@@ -88,7 +92,11 @@ public class MainOrder extends JPanel {
                 .addComponent(titleColumn)
                 .addComponent(column)
             )
-            .addComponent(titlePrice)
+            .addGroup(layout.createParallelGroup()
+                .addComponent(titlePrice)
+                .addComponent(seatType)
+                .addComponent(price)
+            )
         );
     }
 

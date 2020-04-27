@@ -41,6 +41,12 @@ public class Order implements IOrder {
     }
 
     @Override
+    public String getSeatType() {
+
+        return seat.getSeatType().name();
+    }    
+
+    @Override
     public int getHallNumber() {
 
         return session.getHallId();

@@ -34,6 +34,12 @@ public class OrderFeature implements IOrder{
     }
 
     @Override
+    public String getSeatType() {
+
+        return order.getSeatType();
+    }    
+
+    @Override
     public int getHallNumber() {
 
         return order.getHallNumber();
