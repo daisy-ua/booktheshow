@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,9 +16,12 @@ import mdlaf.utils.MaterialColors;
 @SuppressWarnings("serial")
 public class OrderView extends JPanel {
 
-    private MainOrder mainOrder; 
+    private MainOrder mainOrder;
     private JLabel snackOrderLoadLink;
     private SnackOrder snackOrder;
+    private JPanel payOrder;
+    private JLabel totalPrice;
+    private JButton pay;
 
     public OrderView() {
 
@@ -30,10 +34,12 @@ public class OrderView extends JPanel {
         add(mainOrder);
         add(Box.createRigidArea(new Dimension(0, 20)));
 
-
         snackOrderLoadLink = new JLabel("Click here to book some snacks.");
         snackOrderLoadLink.setForeground(MaterialColors.BLUE_400);
         add(snackOrderLoadLink);
+        add(Box.createRigidArea(new Dimension(0, 20)));
+
+        
     }
 
     public JFrame getParentFrame() {

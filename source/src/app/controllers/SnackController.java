@@ -18,8 +18,6 @@ import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import app.models.extraservice.ExtraService;
 import app.models.extraservice.snack.SnackCreator;
@@ -50,6 +48,7 @@ public class SnackController { // TODO: addItemListener
 
         initDefaultSnackPickView();
         initSnackPickEvents();
+        order = new ExtraService();
     }
 
     private void initSnackPickEvents() {
@@ -72,7 +71,7 @@ public class SnackController { // TODO: addItemListener
                 JComboBox<String> type = (JComboBox<String>) e.getSource();
                 String typeSelected = (String) type.getSelectedItem();
                 reloadTasteCheckBox(SnackType.valueOf(typeSelected));
-                loadPrice();
+                loadPickViewPrice();
             }
         });
     }
@@ -84,7 +83,7 @@ public class SnackController { // TODO: addItemListener
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                loadPrice();
+                loadPickViewPrice();
             }
         });
     }
@@ -96,7 +95,7 @@ public class SnackController { // TODO: addItemListener
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                loadPrice();
+                loadPickViewPrice();
             }
         });
     }
@@ -108,7 +107,7 @@ public class SnackController { // TODO: addItemListener
             @Override
             public void stateChanged(ChangeEvent e) {
 
-                loadPrice();
+                loadPickViewPrice();
             }
         });
     }
@@ -126,6 +125,8 @@ public class SnackController { // TODO: addItemListener
 
                     DefaultListModel<String> model = (DefaultListModel<String>)list.getModel(); 
                     model.addElement(snack.getDescription());
+                    order.addSnack(snack);
+                    loadOrderPrice();
                 }
             }
         });
@@ -140,13 +141,15 @@ public class SnackController { // TODO: addItemListener
             @Override
             public void mouseClicked(MouseEvent e) {
 
-                System.out.println("here" + list.getSelectedIndex());
                 DefaultListModel<String> model = (DefaultListModel<String>)list.getModel(); 
-                model.removeElementAt(list.getSelectedIndex());        
+                order.removeSnackById(list.getSelectedIndex());       
+                model.removeElementAt(list.getSelectedIndex()); 
+                loadOrderPrice();
             }
         });
 
     }
+    
     private boolean isAllComboBoxSelected() {
 
         return ((snackPickView.getSnackType().getSelectedIndex() > -1)
@@ -154,7 +157,7 @@ public class SnackController { // TODO: addItemListener
                 && (snackPickView.getSnackSize().getSelectedIndex() > -1));
     }
 
-    private void loadPrice() {
+    private void loadPickViewPrice() {
 
         if (isAllComboBoxSelected()) {
 
@@ -162,6 +165,11 @@ public class SnackController { // TODO: addItemListener
 
             snackPickView.setPriceValue(Double.toString(snack.getTotalPrice()));
         }
+    }
+
+    private void loadOrderPrice() {
+
+        snackOrderView.getPrice().setText(Double.toString(order.getTotalPrice()));
     }
 
     private void reloadTasteCheckBox(SnackType type) {
