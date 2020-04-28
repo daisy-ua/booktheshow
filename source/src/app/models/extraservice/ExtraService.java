@@ -24,6 +24,11 @@ public class ExtraService {
         this.snacks.remove(snack);
     }
 
+    public void removeSnackById(int id) {
+
+        this.snacks.remove(id);
+    }
+
     public double getTotalPrice() {
 
         double amount = 0;

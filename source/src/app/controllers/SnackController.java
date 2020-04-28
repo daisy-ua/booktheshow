@@ -2,15 +2,26 @@ package app.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
+import app.models.extraservice.ExtraService;
 import app.models.extraservice.snack.SnackCreator;
 import app.models.extraservice.snack.SnackCreatorProducer;
 import app.models.extraservice.snack.item.Snack;
@@ -19,27 +30,39 @@ import app.models.extraservice.snack.item.cola.ColaType;
 import app.models.extraservice.snack.item.popcorn.PopcornType;
 import app.models.extraservice.snack.size.SizeType;
 import app.views.SnackOrder;
+import app.views.SnackOrderList;
 import app.views.SnackPick;
 
 public class SnackController { // TODO: addItemListener
 
-    private SnackOrder snackOrderView;
     private SnackPick snackPickView;
+    private SnackOrderList snackOrderView;
     private Snack snack;
+    private ExtraService order;
 
     public SnackController(SnackOrder snackOrderView) {
 
-        this.snackOrderView = snackOrderView;
+        this.snackOrderView = snackOrderView.getSnackOrder();
         this.snackPickView = snackOrderView.getSnackPick();
     }
 
     public void initController() {
 
         initDefaultSnackPickView();
-        initSnackPickEvent();
+        initSnackPickEvents();
     }
 
-    private void initSnackPickEvent() {
+    private void initSnackPickEvents() {
+
+        initSnackPickTypeEvent();
+        initSnackPickTasteEvent();
+        initSnackPickSizeEvent();
+        initSnackPickQuantityEvent();
+        initSnackPickAddButtonEvent();
+        initSnackPickDeleteButtonEvent();
+    }
+
+    private void initSnackPickTypeEvent() {
 
         snackPickView.getSnackType().addActionListener(new ActionListener() {
 
@@ -52,6 +75,9 @@ public class SnackController { // TODO: addItemListener
                 loadPrice();
             }
         });
+    }
+
+    private void initSnackPickTasteEvent() {
 
         snackPickView.getSnackTaste().addActionListener(new ActionListener() {
 
@@ -61,6 +87,9 @@ public class SnackController { // TODO: addItemListener
                 loadPrice();
             }
         });
+    }
+
+    private void initSnackPickSizeEvent() {
 
         snackPickView.getSnackSize().addActionListener(new ActionListener() {
 
@@ -72,6 +101,52 @@ public class SnackController { // TODO: addItemListener
         });
     }
 
+    private void initSnackPickQuantityEvent() {
+
+        snackPickView.getSnackQuantity().addChangeListener(new ChangeListener() {
+
+            @Override
+            public void stateChanged(ChangeEvent e) {
+
+                loadPrice();
+            }
+        });
+    }
+
+    private void initSnackPickAddButtonEvent() {
+
+        snackPickView.getAddButton().addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if(isAllComboBoxSelected()) {
+
+                    JList<String> list = snackOrderView.getOrderList();
+
+                    DefaultListModel<String> model = (DefaultListModel<String>)list.getModel(); 
+                    model.addElement(snack.getDescription());
+                }
+            }
+        });
+    }
+    
+    private void initSnackPickDeleteButtonEvent() {
+        
+        JList<String> list = snackOrderView.getOrderList();
+
+        list.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+                System.out.println("here" + list.getSelectedIndex());
+                DefaultListModel<String> model = (DefaultListModel<String>)list.getModel(); 
+                model.removeElementAt(list.getSelectedIndex());        
+            }
+        });
+
+    }
     private boolean isAllComboBoxSelected() {
 
         return ((snackPickView.getSnackType().getSelectedIndex() > -1)
@@ -81,11 +156,11 @@ public class SnackController { // TODO: addItemListener
 
     private void loadPrice() {
 
-        if(isAllComboBoxSelected()) {
+        if (isAllComboBoxSelected()) {
 
             setSnack();
 
-            snackPickView.setPrice(Double.toString(snack.getTotalPrice()));
+            snackPickView.setPriceValue(Double.toString(snack.getTotalPrice()));
         }
     }
 
@@ -93,7 +168,7 @@ public class SnackController { // TODO: addItemListener
 
         JComboBox<String> cbox = snackPickView.getSnackTaste();
         snackPickView.getSnackSize().setSelectedIndex(-1);
-        snackPickView.setPrice("");
+        snackPickView.setPriceValue("");
 
         switch (type) {
         case POPCORN:
@@ -123,12 +198,14 @@ public class SnackController { // TODO: addItemListener
 
     private void initDefaultSnackPickView() {
 
+        snackPickView.setAddButton(new JButton("Add"));
         snackPickView.setSnackType(initComboBox(SnackType.values()));
         snackPickView.setSnackTaste(initComboBox(PopcornType.values()));
         snackPickView.setSnackSize(initComboBox(SizeType.values()));
         initQuantityField();
+        snackPickView.setPrice(new JLabel());
     }
-
+    
     private void setSnack() {
 
         SnackType type = SnackType.valueOf((String) snackPickView.getSnackType().getSelectedItem());
@@ -155,7 +232,9 @@ public class SnackController { // TODO: addItemListener
         PopcornType taste = PopcornType.valueOf((String) snackPickView.getSnackTaste().getSelectedItem());
 
         snack = snackCreator.getPopcornSnack(taste);
+
         setSnackSize();
+        setSnackQuantity();
     }
 
     private void getColaSnack(SnackCreator snackCreator) {
@@ -163,18 +242,23 @@ public class SnackController { // TODO: addItemListener
         ColaType taste = ColaType.valueOf((String) snackPickView.getSnackTaste().getSelectedItem());
 
         snack = snackCreator.getColaSnack(taste);
+
         setSnackSize();
+        setSnackQuantity();
     }
 
-    private void setSnackQuantity() {
-
-        //TODO: init
-    }
     private void setSnackSize() {
 
         SizeType size = SizeType.valueOf((String) snackPickView.getSnackSize().getSelectedItem());
 
         snack.setSize(size);
+    }
+
+    private void setSnackQuantity() {
+
+        int quantity = (int) snackPickView.getSnackQuantity().getValue();
+
+        snack.setQuantity(quantity);
     }
 
     private void initQuantityField() {
