@@ -1,21 +1,32 @@
 package app.views;
 
+import java.awt.Dimension;
+
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
 @SuppressWarnings("serial")
 public class SnackOrder extends JPanel {
 
     private SnackPick snackPick;
-    private JTextArea snackOrder;
+    private SnackOrderList snackOrder;
 
     public SnackOrder() {
 
         super();
-
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        
         snackPick = new SnackPick();
-        // snackPick.setVisible(true);
+        snackOrder = new SnackOrderList();
+
+        setAlignmentX(JPanel.LEFT_ALIGNMENT);
+        snackPick.setAlignmentX(JPanel.LEFT_ALIGNMENT);
+        snackOrder.setAlignmentX(JPanel.LEFT_ALIGNMENT);
+
+        snackPick.setMaximumSize(new Dimension(800, 100));
+
         add(snackPick);
+        add(snackOrder);
     }
 
     public SnackPick getSnackPick() {
@@ -23,7 +34,7 @@ public class SnackOrder extends JPanel {
         return snackPick;
     }
 
-    public JTextArea getSnackOrder() {
+    public SnackOrderList getSnackOrder() {
 
         return snackOrder;
     }

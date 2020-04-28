@@ -2,6 +2,7 @@ package app.views;
 
 import java.awt.FlowLayout;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,13 +16,11 @@ public class SnackPick extends JPanel {
     private JComboBox<String> snackSize;
     private JSpinner snackQuantity;
     private JLabel price;
+    private JButton addButton;
 
     public SnackPick() {
 
         super(new FlowLayout(FlowLayout.LEFT));
-
-        price = new JLabel();
-        add(price);
     }
 
     public JComboBox<String> getSnackType() {
@@ -68,13 +67,30 @@ public class SnackPick extends JPanel {
         return snackQuantity;
     }
 
-    public void setPrice(String value) {
+    public void setPriceValue(String value) {
 
         price.setText(value);
+    }
+
+    public void setPrice(JLabel price) {
+
+        this.price = price;
+        add(this.price);
     }
 
     public JLabel getPrice() {
 
         return price;
+    }
+    
+    public void setAddButton(JButton addButton) {
+        
+        this.addButton = addButton;
+        add(this.addButton);
+    }
+
+    public JButton getAddButton() {
+        
+        return addButton;
     }
 }
