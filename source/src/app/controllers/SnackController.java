@@ -27,18 +27,19 @@ import app.models.extraservice.snack.item.SnackType;
 import app.models.extraservice.snack.item.cola.ColaType;
 import app.models.extraservice.snack.item.popcorn.PopcornType;
 import app.models.extraservice.snack.size.SizeType;
+import app.models.order.IOrder;
 import app.views.SnackOrder;
 import app.views.SnackOrderList;
 import app.views.SnackPick;
 
-public class SnackController { // TODO: addItemListener
+public class SnackController {
 
     private SnackPick snackPickView;
     private SnackOrderList snackOrderView;
     private Snack snack;
     private ExtraService order;
 
-    public SnackController(SnackOrder snackOrderView) {
+    public SnackController(SnackOrder snackOrderView, IOrder mainOrder) {
 
         this.snackOrderView = snackOrderView.getSnackOrder();
         this.snackPickView = snackOrderView.getSnackPick();
@@ -49,6 +50,11 @@ public class SnackController { // TODO: addItemListener
         initDefaultSnackPickView();
         initSnackPickEvents();
         order = new ExtraService();
+    }
+
+    public ExtraService getExtraService() {
+
+        return order;
     }
 
     private void initSnackPickEvents() {

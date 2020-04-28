@@ -19,15 +19,18 @@ public class OrderView extends JPanel {
     private MainOrder mainOrder;
     private JLabel snackOrderLoadLink;
     private SnackOrder snackOrder;
-    private JPanel payOrder;
-    private JLabel totalPrice;
-    private JButton pay;
+    private JButton next;
 
     public OrderView() {
 
         super();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
+
+        next = new JButton("Continue");
+        next.setAlignmentX(JButton.LEFT_ALIGNMENT);
+        add(next);
+        add(Box.createRigidArea(new Dimension(0, 30)));
 
         mainOrder = new MainOrder();
         mainOrder.setAlignmentX(JPanel.LEFT_ALIGNMENT);
@@ -38,8 +41,6 @@ public class OrderView extends JPanel {
         snackOrderLoadLink.setForeground(MaterialColors.BLUE_400);
         add(snackOrderLoadLink);
         add(Box.createRigidArea(new Dimension(0, 20)));
-
-        
     }
 
     public JFrame getParentFrame() {
@@ -67,5 +68,10 @@ public class OrderView extends JPanel {
     public JLabel getSnackOrderLoadLink() {
 
         return snackOrderLoadLink;
+    }
+
+    public JButton getNexButton() {
+
+        return next;
     }
 }
