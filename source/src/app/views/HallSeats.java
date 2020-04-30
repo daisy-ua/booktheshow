@@ -46,10 +46,10 @@ public class HallSeats extends JPanel {
             for(int j = 0; j < seats[i].length; j++) {
 
                 if(seats[i][j].getClientProperty("seatType") == SeatType.LUX) {
-                    seats[i][j].setBackground(Color.RED);
+                    seats[i][j].setForeground(Color.RED);
                 } 
                 else    
-                    seats[i][j].setBackground(Color.BLUE);
+                    seats[i][j].setForeground(Color.BLUE);
 
                     add(seats[i][j], gbc);
                 gbc.gridx++;
