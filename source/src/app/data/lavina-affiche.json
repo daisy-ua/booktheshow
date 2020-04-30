@@ -1,0 +1,72 @@
+{
+    "movieNextId": 2,
+    "hallNextId": 2,
+    "sessionNextId" : 5,
+    "movies": [
+        {
+            "id": 0,
+            "title": "Ocean's Eleven", 
+            "duration": 116,
+            "description": "Danny Ocean and his eleven accomplices plan to rob three Las Vegas casinos simultaneously.",
+            "imagePath": "https://i.pinimg.com/originals/1a/ef/b4/1aefb4bfd7063a34361aebf8b2779337.jpg",
+            "session": [
+                {
+                    "id": 0,
+                    "hall": 0,
+                    "luxSeat": 120.0,
+                    "goodSeat": 60.0,
+                    "time": "10:15"
+                },
+                {
+                    "id": 1,
+                    "hall": 0,
+                    "luxSeat": 200.0,
+                    "goodSeat": 90.0,
+                    "time": "12:50"
+                },
+                {
+                    "id": 2,
+                    "hall": 1,
+                    "luxSeat": 120.0,
+                    "goodSeat": 60.0,
+                    "time": "11:15"
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "title": "Ocean's Twelve", 
+            "duration": 125,
+            "description": "Daniel Ocean recruits one more team member so he can pull off three major European heists in this sequel to Ocean's 11.",
+            "imagePath": "https://fffmovieposters.com/wp-content/uploads/73642.jpg",
+            "session": [
+                {
+                    "id": 3,
+                    "hall": 1,
+                    "luxSeat": 90.0,
+                    "goodSeat": 50.0,
+                    "time": "10:15"
+                },
+                {
+                    "id": 4,
+                    "hall": 1,
+                    "luxSeat": 120.0,
+                    "goodSeat": 60.0,
+                    "time": "12:50"
+                }
+            ]
+        }
+    ],
+    "halls": [
+        {
+            "id": 0,
+            "rows": 9,
+            "columns": 14
+        },
+        {
+            "id": 1, 
+            "rows": 6,
+            "columns": 16
+        }
+    ]
+}
