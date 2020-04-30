@@ -1,17 +1,18 @@
 package app.views;
 
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
-@SuppressWarnings("serial") 
+@SuppressWarnings("serial")
 public class PaymentView extends JPanel {
 
     private JLabel priceText;
@@ -20,9 +21,11 @@ public class PaymentView extends JPanel {
     private JComboBox<String> payStrategy;
     private JPanel paySet;
     private JPanel priceSet;
+    private JPanel form;
+    private JButton pay;
 
     public PaymentView() {
-        
+
         super();
 
         setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 10, 0, 10), new EtchedBorder()));
@@ -43,12 +46,21 @@ public class PaymentView extends JPanel {
         paySet.add(payStrategyText);
         paySet.add(payStrategy);
 
-        // paySet.setMaximumSize(new Dimension(Integer.MAX_VALUE, payStrategy.getMinimumSize().height));
+        form = new JPanel(new CardLayout());
+        form.setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 10, 0, 10), new EtchedBorder()));
 
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        pay = new JButton("Pay");
+        setLayout(null);
+
+        priceSet.setBounds(30, 30, 400, 30);
+        paySet.setBounds(30, 70, 400, 60);
+        form.setBounds(30, 160, 400, 200);
+        pay.setBounds(30, 400, 80, 30);
+
         add(priceSet);
         add(paySet);
-
+        add(form);
+        add(pay);
     }
 
     public JLabel getPrice() {
@@ -61,4 +73,13 @@ public class PaymentView extends JPanel {
         return payStrategy;
     }
 
+    public JPanel getForm() {
+
+        return form;
+    }
+
+    public JButton getPayButton() {
+
+        return pay;
+    }
 }
