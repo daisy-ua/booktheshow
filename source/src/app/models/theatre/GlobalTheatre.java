@@ -1,6 +1,6 @@
 package app.models.theatre;
 
-public class GlobalTheatre {
+public class GlobalTheatre { //TODO: replace by Theatre
 
     private static Theatre _theatre;
 

@@ -8,8 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import app.controllers.TheatreController;
-import mdlaf.animation.MaterialUIMovement;
-import mdlaf.utils.MaterialColors;
 
 @SuppressWarnings("serial")
 public class TheatrePick extends JPanel {
@@ -24,7 +22,6 @@ public class TheatrePick extends JPanel {
         lavinaMultiplex = new JButton("Lavina Multiplex");
         lavinaMultiplex.setFocusable(false);
 
-        MaterialUIMovement.add(lavinaMultiplex, MaterialColors.GRAY_100);
         add(lavinaMultiplex);
 
         new TheatreController(this).initController();

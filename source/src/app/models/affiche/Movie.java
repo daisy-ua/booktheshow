@@ -1,9 +1,6 @@
 package app.models.affiche;
 
-import org.json.*;
-
 import java.util.*;
-import java.time.LocalTime;
 
 public class Movie {
 
@@ -24,9 +21,9 @@ public class Movie {
         this.sessions = new ArrayList<Session>();
     }
 
-    public Movie addSessions(JSONArray sessions) {
+    public Movie addSessions(List<Session> sessions) {
 
-        sessions.forEach(session -> parseSessionObject((JSONObject) session));
+        this.sessions = sessions;
         return this;
     }
 
@@ -44,7 +41,6 @@ public class Movie {
         return timelines;
     }
     
-
     public int getId() {
 
         return this.id;
@@ -68,17 +64,5 @@ public class Movie {
     public Session getSessionDetails(int sessionId) {
 
         return this.sessions.get(sessionId);
-    }
-
-    private void parseSessionObject(JSONObject session) {
-
-        int id = (int) session.get("id");
-        int hallId = (int) session.get("hall");
-        double luxSeatPrice = (double) session.get("luxSeat");
-        double goodSeatPrice = (double) session.get("goodSeat");
-        String time = (String) session.get("time");
-
-        this.sessions.add(new Session(id, hallId, luxSeatPrice, goodSeatPrice, time));
-
     }
 }
