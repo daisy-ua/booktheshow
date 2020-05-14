@@ -14,6 +14,7 @@ import app.models.payment.PayByCard;
 import app.models.payment.PayByPayPal;
 import app.models.payment.PayStrategy;
 import app.models.payment.PayType;
+import app.models.theatre.GlobalTheatre;
 import app.views.CardPayment;
 import app.views.PayPalPayment;
 import app.views.PaymentView;
@@ -107,9 +108,12 @@ public class PaymentController {
                     return;
                 }          
                 
-                if(strategy.makePayment(order.getTotalPrice()))
+                if(strategy.makePayment(order)) {
+
                     JOptionPane.showMessageDialog(null, "Order is paid");
-                paymentView.getPayButton().setEnabled(false);    
+                    GlobalTheatre.getTheatre().sendOrderData(order);
+                    paymentView.getPayButton().setEnabled(false);    
+                }
             }
             
         });

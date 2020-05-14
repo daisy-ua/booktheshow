@@ -2,6 +2,7 @@ package app.models.payment;
 
 import java.util.Map;
 
+import app.models.order.IOrder;
 import app.models.payment.instance.CreditCard;
 
 public class PayByCard implements PayStrategy {
@@ -24,13 +25,13 @@ public class PayByCard implements PayStrategy {
     }
 
     @Override
-    public boolean makePayment(double price) {
+    public boolean makePayment(IOrder order) {
 
         //implement your payment using card option logic logic here
 
         if(card == null) return false;
 
-        card.setAmount(price);
+        card.setAmount(order.getTotalPrice());
         
         return true; 
     }

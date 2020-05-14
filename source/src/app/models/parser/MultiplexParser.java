@@ -57,7 +57,7 @@ public class MultiplexParser {
         node.put("row", order.getSeatRow());
         node.put("column", order.getSeatColumn());
 
-        database.getJSONArray("halls").getJSONObject(order.getHallNumber() - 1)
+        database.getJSONArray("halls").getJSONObject(order.getHallNumber())
             .getJSONArray("takenSeats").put(node);
         uploadDataBase();
     }

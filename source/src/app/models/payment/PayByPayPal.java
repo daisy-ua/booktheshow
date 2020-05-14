@@ -2,6 +2,7 @@ package app.models.payment;
 
 import java.util.Map;
 
+import app.models.order.IOrder;
 import app.models.user.*;
 
 public class PayByPayPal implements PayStrategy {
@@ -22,7 +23,7 @@ public class PayByPayPal implements PayStrategy {
     }
 
     @Override
-    public boolean makePayment(double price) {
+    public boolean makePayment(IOrder order) {
 
         //implement payment using wallet option logic logic here
 

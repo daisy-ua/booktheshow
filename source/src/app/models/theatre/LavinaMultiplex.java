@@ -9,7 +9,6 @@ public class LavinaMultiplex extends Theatre {
 
         MultiplexParser.loadParser("lavina-affiche.json");
         initTheatre();
-        MultiplexParser.uploadDataToDataBase(null);
     }
 
     private void initTheatre() {
@@ -21,6 +20,6 @@ public class LavinaMultiplex extends Theatre {
     @Override
     public void sendOrderData(IOrder order) {
 
-        
+        MultiplexParser.uploadDataToDataBase(order);
     }
 }

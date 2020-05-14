@@ -245,7 +245,7 @@ public class SnackController {
 
         PopcornType taste = PopcornType.valueOf((String) snackPickView.getSnackTaste().getSelectedItem());
 
-        snack = snackCreator.getPopcornSnack(taste);
+        snack = snackCreator.getSnack(taste);
 
         setSnackSize();
         setSnackQuantity();
@@ -255,7 +255,7 @@ public class SnackController {
 
         ColaType taste = ColaType.valueOf((String) snackPickView.getSnackTaste().getSelectedItem());
 
-        snack = snackCreator.getColaSnack(taste);
+        snack = snackCreator.getSnack(taste);
 
         setSnackSize();
         setSnackQuantity();
