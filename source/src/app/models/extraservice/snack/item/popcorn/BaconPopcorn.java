@@ -10,7 +10,6 @@ public class BaconPopcorn extends Snack {
 
         super();
         this.taste = "Bacon";
-        this.price = 20;
     }
 
     @Override

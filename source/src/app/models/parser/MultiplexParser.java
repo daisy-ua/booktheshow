@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.json.JSONArray;
@@ -49,6 +51,32 @@ public class MultiplexParser {
         movieObjects.forEach(obj -> movies.add(parseMovieObject((JSONObject) obj)));
 
         return movies;
+    }
+
+    public static Map<String, Double> parsePopcorn() {
+
+        Map<String, Double> snacks = new HashMap<>();
+
+        JSONArray popcornObjects = database.getJSONObject("snacks").getJSONArray("popcorn");
+
+        popcornObjects.forEach(obj -> snacks.put(
+            (String)((JSONObject)obj).get("taste"), 
+            ((Number)((JSONObject)obj).get("price")).doubleValue()));   
+            
+        return snacks;    
+    }
+
+    public static Map<String, Double> parseCola() {
+
+        Map<String, Double> snacks = new HashMap<>();
+
+        JSONArray popcornObjects = database.getJSONObject("snacks").getJSONArray("cola");
+
+        popcornObjects.forEach(obj -> snacks.put(
+            (String)((JSONObject)obj).get("taste"), 
+            ((Number)((JSONObject)obj).get("price")).doubleValue()));   
+            
+        return snacks;    
     }
 
     public static void uploadDataToDataBase(IOrder order) {

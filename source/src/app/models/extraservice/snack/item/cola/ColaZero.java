@@ -10,7 +10,6 @@ public class ColaZero extends Snack {
 
         super();
         this.taste = "Zero";
-        this.price = 28;
     }
 
     @Override

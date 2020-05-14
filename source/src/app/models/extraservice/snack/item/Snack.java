@@ -5,7 +5,7 @@ import app.models.extraservice.snack.size.*;
 public abstract class Snack {
 
     private SizeState size;
-    protected double price;
+    protected static double price;
     protected int quantity;
 
     public Snack() {
@@ -18,7 +18,7 @@ public abstract class Snack {
 
     public double getTotalPrice() {
 
-        return (this.price + (int)(this.price * size.getTax())) * this.quantity;
+        return (price + (int)(price * size.getTax())) * this.quantity;
     }
 
     public SizeState getSize() {
@@ -48,4 +48,10 @@ public abstract class Snack {
 
         this.quantity = quantity;
     }
+
+    public static void setPrice(double snackPrice) {
+
+        price = snackPrice;
+    }
+
 }
