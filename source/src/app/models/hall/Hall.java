@@ -33,13 +33,13 @@ public class Hall implements IHall{
 
             for(int j = 0; j < this.columns; j++) {
 
-                this.seats[i][j] = SeatStore.getSeat(SeatType.GOOD).setPosition(i, j);
+                this.seats[i][j] = SeatStore.getSeat(SeatType.GOOD).setPosition(new SeatPosition(i, j));
             }
         }
 
         for(int j = 0; j < this.columns; j++) {
 
-            this.seats[this.rows - 1][j] = SeatStore.getSeat(SeatType.LUX).setPosition(this.rows - 1, j);
+            this.seats[this.rows - 1][j] = SeatStore.getSeat(SeatType.LUX).setPosition(new SeatPosition(this.rows - 1, j));
         }
     }
 

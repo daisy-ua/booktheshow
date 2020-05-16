@@ -11,6 +11,7 @@ import app.models.order.IOrder;
 import app.models.order.Order;
 import app.models.seat.LuxSeat;
 import app.models.seat.Seat;
+import app.models.seat.SeatPosition;
 import app.models.seat.SeatStore;
 import app.models.seat.SeatType;
 import app.models.theatre.GlobalTheatre;
@@ -59,7 +60,7 @@ public class SeatController {
         SeatType type = (SeatType) seat.getClientProperty("seatType");
 
         setupOrderView(SeatStore.getSeat(type)
-            .setPosition(row, column)
+            .setPosition(new SeatPosition(row, column))
             .setPrice(price)
             .setSeatType(type)
         );

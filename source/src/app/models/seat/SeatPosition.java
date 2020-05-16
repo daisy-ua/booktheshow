@@ -1,6 +1,6 @@
 package app.models.seat;
 
-public class SeatPosition { //TODO: change position in Seat
+public class SeatPosition {
     
     private int row;
     private int column;

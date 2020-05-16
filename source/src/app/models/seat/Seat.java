@@ -5,8 +5,7 @@ public abstract class Seat implements Cloneable {
     protected double price;
     protected boolean isTaken;
     protected SeatType seatType;
-    protected int row;
-    protected int column;
+    protected SeatPosition seatPosition;
 
     public Seat() {
 
@@ -36,21 +35,20 @@ public abstract class Seat implements Cloneable {
         return this.seatType;
     }
 
-    public Seat setPosition(int row, int column) {
+    public Seat setPosition(SeatPosition position) {
 
-        this.row = row;
-        this.column = column;
+        this.seatPosition = position;
         return this;
     }
 
     public int getRow() {
 
-        return this.row;
+        return seatPosition.getRow();
     }
 
     public int getColumn() {
 
-        return this.column;
+        return seatPosition.getColumn();
     }
 
     public boolean reserveSeat() {

@@ -57,6 +57,36 @@
     "hallNextId": 2,
     "movieNextId": 2,
     "sessionNextId": 5,
+    "snacks": {
+        "popcorn": [
+            {
+                "price": 22,
+                "taste": "BACON"
+            },
+            {
+                "price": 20,
+                "taste": "CHEESE"
+            },
+            {
+                "price": 30,
+                "taste": "CARAMEL"
+            }
+        ],
+        "cola": [
+            {
+                "price": 25,
+                "taste": "VANILLA"
+            },
+            {
+                "price": 20,
+                "taste": "ORIGINAL"
+            },
+            {
+                "price": 29,
+                "taste": "ZERO"
+            }
+        ]
+    },
     "halls": [
         {
             "columns": 14,
@@ -84,6 +114,10 @@
                 {
                     "column": 10,
                     "row": 5
+                },
+                {
+                    "column": 12,
+                    "row": 8
                 }
             ],
             "id": 0,
@@ -120,35 +154,5 @@
             "id": 1,
             "rows": 6
         }
-    ],
-    "snacks": {
-        "cola": [
-            {
-                "taste": "VANILLA",
-                "price": 25
-            },
-            {
-                "taste": "ORIGINAL",
-                "price": 20
-            },
-            {
-                "taste": "ZERO",
-                "price": 29
-            }
-        ],
-        "popcorn": [
-            {
-                "taste": "BACON",
-                "price": 22
-            },
-            {
-                "taste": "CHEESE",
-                "price": 20
-            },
-            {
-                "taste": "CARAMEL",
-                "price": 30
-            }
-        ]
-    }
+    ]
 }

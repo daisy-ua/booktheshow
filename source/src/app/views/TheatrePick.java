@@ -1,9 +1,8 @@
 package app.views;
 
-import java.awt.FlowLayout;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -17,11 +16,17 @@ public class TheatrePick extends JPanel {
     public TheatrePick() {
 
         super();
-        setLayout(new FlowLayout(FlowLayout.CENTER));
+        setLayout(null);
 
         lavinaMultiplex = new JButton("Lavina Multiplex");
         lavinaMultiplex.setFocusable(false);
 
+        JLabel info = new JLabel("Select the theatre to continue..");
+
+        info.setBounds(25, 25, 400, 30);
+        lavinaMultiplex.setBounds(25, 60, 200, 30);
+
+        add(info);
         add(lavinaMultiplex);
 
         new TheatreController(this).initController();

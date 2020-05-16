@@ -12,8 +12,8 @@ import javax.swing.JPanel;
 import app.models.order.IOrder;
 import app.models.payment.PayByCard;
 import app.models.payment.PayByPayPal;
-import app.models.payment.PayStrategy;
 import app.models.payment.PayType;
+import app.models.payment.PaymentContext;
 import app.models.theatre.GlobalTheatre;
 import app.views.CardPayment;
 import app.views.PayPalPayment;
@@ -26,12 +26,13 @@ public class PaymentController {
     private CardPayment cardView;
     private PayPalPayment payPalView;
     private IPayment dataCollector;
-    private PayStrategy strategy;
+    private PaymentContext payment;
 
     public PaymentController(IOrder order, PaymentView paymentView) {
 
         this.paymentView = paymentView;
         this.order = order;
+        this.payment = new PaymentContext();
     }
 
     public void initController() {
@@ -39,7 +40,7 @@ public class PaymentController {
         initPayAmount();
         initPayStrategyComboBox();
         initFormPanels();
-        strategy = new PayByCard();
+        payment.setStrategy(new PayByCard());
         dataCollector = new CardController(cardView);
         initPayStrategyEvent();
         initPayEvent();
@@ -76,18 +77,18 @@ public class PaymentController {
                 layout.show(form, strategyType);
 
                 switch (PayType.valueOf(strategyType)) {
-                case CARD: {
-                    
-                    strategy = new PayByCard();
-                    dataCollector = new CardController(cardView);
-                    break;
-                }
-                case PAYPAL: {
+                    case CARD: {
 
-                    strategy = new PayByPayPal();
-                    dataCollector = new PayPalController(payPalView);
-                    break;
-                }
+                        payment.setStrategy(new PayByCard());
+                        dataCollector = new CardController(cardView);
+                        break;
+                    }
+                    case PAYPAL: {
+
+                        payment.setStrategy(new PayByPayPal());
+                        dataCollector = new PayPalController(payPalView);
+                        break;
+                    }
                 }
             }
         });
@@ -102,20 +103,17 @@ public class PaymentController {
 
                 Map<String, String> data = dataCollector.getData();
 
-                if(!strategy.checkInquiry(data)) {
+                if (!payment.pay(data, order)) {
 
                     JOptionPane.showMessageDialog(null, "Wrong Data");
                     return;
-                }          
-                
-                if(strategy.makePayment(order)) {
-
-                    JOptionPane.showMessageDialog(null, "Order is paid");
-                    GlobalTheatre.getTheatre().sendOrderData(order);
-                    paymentView.getPayButton().setEnabled(false);    
                 }
+
+                JOptionPane.showMessageDialog(null, "Order is paid");
+                GlobalTheatre.getTheatre().sendOrderData(order);
+                paymentView.getPayButton().setEnabled(false);
             }
-            
+
         });
     }
 
